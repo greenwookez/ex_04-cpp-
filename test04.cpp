@@ -13,6 +13,9 @@ int main() {
     12 + plist;
     print_list_state(plist,"plist");
 
+
+    print_list_state(plist,"plist");
+    print_list_state(plist,"plist");
     int * tmp = plist.Store(66);
     printf("%d = tmp\n", *tmp);
     print_list_state(plist,"plist");
