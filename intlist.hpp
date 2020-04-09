@@ -11,7 +11,6 @@ class IntList : public IntDeque {
     int * Fetch();
     int * Store(int elem);
 
-    public:
     IntList();
     IntList(IntList & plist);
     int * operator +(int _element); // overloading operator list + int
