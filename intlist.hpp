@@ -3,7 +3,10 @@
 class IntList : public IntDeque {
     IntDequeElement * current_elem;
 
+     // определяет номер текущего элемента по счёту начиная с 1
+    
     public:
+    int countCurrentElemPosition();
     IntDequeElement * GoToLeft();
     IntDequeElement * GoToRight();
     IntDequeElement * GoToNext();
