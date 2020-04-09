@@ -153,12 +153,10 @@ int* operator +(int _element, IntList & _deque) {//int + list
 };
 
 int * IntList :: operator --() {
-    printf("lol\n");
     if (left == right) {
         current_elem = NULL;
         return RemoveLeft();
     } else {
-        printf("lol2\n");
         current_elem = current_elem -> GetNext();
         return RemoveLeft();
     }
@@ -166,23 +164,99 @@ int * IntList :: operator --() {
 };
 
 int * IntList :: operator --(int nothing) {
-    printf("kek\n");
     if (left == right) {
         current_elem = NULL;
         return RemoveRight();
     } else {
 
-        printf("kek2\n");
         current_elem = current_elem -> GetPrev();
         return RemoveRight();
     }    
 };
 
-/*IntList & IntList :: operator =(IntList & _deque) {
+IntList & IntList :: operator =(IntList & _list) {
+    IntDequeElement * tmp;
+    IntDequeElement * tmp1;
+    IntDequeElement * tmp2;
+    IntDequeElement * marker;
+    
+    if (this == &_list) {
+        return *this;
+    };
 
+    if (_list.left == _list.right && _list.right != NULL) {
+        buffer = _list.buffer;
+        tmp2 = new IntDequeElement;
+        tmp2 -> SetPrev(NULL);
+        tmp2 -> SetNext(NULL);
+        tmp2 -> SetElement(_list.right -> GetElement());
+        left = tmp2;
+        right = tmp2;
+
+    } else if (_list.left == _list.right && _list.right == NULL) {
+            buffer = _list.buffer;
+            left = NULL;
+            right = NULL;
+    } else {
+        buffer = _list.buffer;
+        marker = _list.left;
+        tmp2 = new IntDequeElement;
+        left = tmp2;
+        tmp2 -> SetPrev(NULL);
+        tmp2 -> SetElement(marker -> GetElement());
+        marker = marker -> GetNext();
+        tmp1 = tmp2;
+        while(marker -> GetNext()) {
+            tmp2 = new IntDequeElement;
+            tmp1 -> SetNext(tmp2);
+            tmp2 -> SetPrev(tmp1);
+            tmp2 -> SetElement(marker -> GetElement());
+            marker = marker -> GetNext();
+            tmp1 = tmp2;
+        };
+        tmp2 = new IntDequeElement;
+        right = tmp2;
+        tmp1 -> SetNext(tmp2);
+        tmp2 -> SetPrev(tmp1);
+        tmp2 -> SetElement(marker -> GetElement());
+    };
+
+    int count,i;
+    count = _list.countCurrentElemPosition();
+    marker = left;
+    i = 1;
+    while(i < count) {
+        marker = marker -> GetNext();
+        i++;
+    };
+    current_elem = marker;
+
+    return *this;
 };
 
 
-int IntList :: operator ==(IntList & _deque) {
+int IntList :: operator ==(IntList & _list) {
+    IntDequeElement * tmp1;
+    IntDequeElement * tmp2;
+    if (this -> countCurrentElemPosition() != _list.countCurrentElemPosition()) {
+        return 0;
+    }
+    tmp1 = this -> left;
+    tmp2 = _list.left; 
+    while (1) {
+        if ((tmp1 == NULL && tmp2 != NULL) || (tmp2 == NULL && tmp1 != NULL)) {
+            return 0;
+        } else if (tmp1 == NULL && tmp2 == NULL) {
+            return 1;
 
-};*/ 
+        } else {
+            if (tmp1 -> GetElement() != tmp2 -> GetElement()) {
+                return 0;
+            } else {
+                tmp1 = tmp1 -> GetNext();
+                tmp2 = tmp2 -> GetNext();
+            };
+        };
+        
+    };
+}; 
