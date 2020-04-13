@@ -157,6 +157,7 @@ int * IntList :: operator --() {
         current_elem = NULL;
         return RemoveLeft();
     } else {
+        GoToLeft();
         current_elem = current_elem -> GetNext();
         return RemoveLeft();
     }
@@ -168,7 +169,7 @@ int * IntList :: operator --(int nothing) {
         current_elem = NULL;
         return RemoveRight();
     } else {
-
+        GoToRight();
         current_elem = current_elem -> GetPrev();
         return RemoveRight();
     }    

@@ -1,4 +1,4 @@
-class IntDequeElement{
+class IntDequeElement {
     int element;
     IntDequeElement* next;
     IntDequeElement* prev;

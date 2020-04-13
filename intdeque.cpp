@@ -168,7 +168,6 @@
     
     int * IntDeque :: RemoveLeft() {
         IntDequeElement * tmp;
-
         if (this -> left == NULL) {
             return NULL;
         } else if (this -> left == this -> right){
