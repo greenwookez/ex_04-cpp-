@@ -231,8 +231,8 @@
 /* End of IntDeque Methods */
 
 /* IntDeque Operators */
-    int* IntDeque :: operator + (int _element) { // deque + elem
-        return this -> AddRight(_element);
+    int* operator + (IntDeque & _deque, int _element) { // deque + elem
+        return _deque.AddRight(_element);
     };
 
     int* operator +(int _element, IntDeque & _deque) { // elem + deque

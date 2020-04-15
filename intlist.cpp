@@ -26,47 +26,8 @@ int IntList :: countCurrentElemPosition() {
     return 0;
 };
 
-IntList :: IntList(IntList & plist) {
-    IntDequeElement * tmp1;
-    IntDequeElement * tmp2;
+IntList :: IntList(IntList & plist) : IntDeque(plist) {
     IntDequeElement * marker;
-    if (plist.left == plist.right && plist.right != NULL) {
-        buffer = plist.buffer;
-        tmp2 = new IntDequeElement;
-        tmp2 -> SetPrev(NULL);
-        tmp2 -> SetNext(NULL);
-        tmp2 -> SetElement(plist.right -> GetElement());
-        left = tmp2;
-        right = tmp2;
-
-    } else if (plist.left == plist.right && plist.right == NULL) {
-            buffer = plist.buffer;
-            left = NULL;
-            right = NULL;
-    } else {
-        buffer = plist.buffer;
-        marker = plist.left;
-        tmp2 = new IntDequeElement;
-        left = tmp2;
-        tmp2 -> SetPrev(NULL);
-        tmp2 -> SetElement(marker -> GetElement());
-        marker = marker -> GetNext();
-        tmp1 = tmp2;
-        while(marker -> GetNext()) {
-            tmp2 = new IntDequeElement;
-            tmp1 -> SetNext(tmp2);
-            tmp2 -> SetPrev(tmp1);
-            tmp2 -> SetElement(marker -> GetElement());
-            marker = marker -> GetNext();
-            tmp1 = tmp2;
-        };
-        tmp2 = new IntDequeElement;
-        right = tmp2;
-        tmp1 -> SetNext(tmp2);
-        tmp2 -> SetPrev(tmp1);
-        tmp2 -> SetElement(marker -> GetElement());
-    };
-
     int count,i;
     count = plist.countCurrentElemPosition();
     marker = left;
@@ -129,29 +90,25 @@ int * IntList :: Store(int elem) {
     }
 };
 
-int * IntList :: operator +(int _element) {//list + int
+int * IntList :: AddLeft(int _element) {
     int * tmp;
-    tmp = this -> AddRight(_element);
-    if (tmp != NULL) {
-        current_elem = right;
-        return tmp;
-    } else {
-        return NULL;
+
+    if (tmp = IntDeque :: AddLeft(_element)) {
+        current_elem = GetLeft();
     }
+
+    return tmp;
 };
 
-int* operator +(int _element, IntList & _deque) {//int + list
+int * IntList :: AddRight(int _element) {
     int * tmp;
-    tmp = _deque.AddLeft(_element);
-    if (tmp != NULL) {
-        _deque.current_elem = _deque.left;
-        return tmp;
-    } else {
-        return NULL;
-    }
-    
-};
 
+    if (tmp = IntDeque :: AddRight(_element)) {
+        current_elem = GetRight();
+    }
+
+    return tmp;
+};
 int * IntList :: operator --() {
     if (left == right) {
         current_elem = NULL;
@@ -176,52 +133,10 @@ int * IntList :: operator --(int nothing) {
 };
 
 IntList & IntList :: operator =(IntList & _list) {
-    IntDequeElement * tmp;
-    IntDequeElement * tmp1;
-    IntDequeElement * tmp2;
     IntDequeElement * marker;
-    
-    if (this == &_list) {
-        return *this;
-    };
 
-    if (_list.left == _list.right && _list.right != NULL) {
-        buffer = _list.buffer;
-        tmp2 = new IntDequeElement;
-        tmp2 -> SetPrev(NULL);
-        tmp2 -> SetNext(NULL);
-        tmp2 -> SetElement(_list.right -> GetElement());
-        left = tmp2;
-        right = tmp2;
 
-    } else if (_list.left == _list.right && _list.right == NULL) {
-            buffer = _list.buffer;
-            left = NULL;
-            right = NULL;
-    } else {
-        buffer = _list.buffer;
-        marker = _list.left;
-        tmp2 = new IntDequeElement;
-        left = tmp2;
-        tmp2 -> SetPrev(NULL);
-        tmp2 -> SetElement(marker -> GetElement());
-        marker = marker -> GetNext();
-        tmp1 = tmp2;
-        while(marker -> GetNext()) {
-            tmp2 = new IntDequeElement;
-            tmp1 -> SetNext(tmp2);
-            tmp2 -> SetPrev(tmp1);
-            tmp2 -> SetElement(marker -> GetElement());
-            marker = marker -> GetNext();
-            tmp1 = tmp2;
-        };
-        tmp2 = new IntDequeElement;
-        right = tmp2;
-        tmp1 -> SetNext(tmp2);
-        tmp2 -> SetPrev(tmp1);
-        tmp2 -> SetElement(marker -> GetElement());
-    };
-
+    IntDeque::operator=(_list);
     int count,i;
     count = _list.countCurrentElemPosition();
     marker = left;

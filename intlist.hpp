@@ -6,7 +6,8 @@ class IntList : public IntDeque {
     int countCurrentElemPosition(); // определяет номер текущего элемента по счёту начиная с 1
     
     public:
-    
+    int * AddLeft(int element);
+    int * AddRight(int element);
     IntDequeElement * GoToLeft();
     IntDequeElement * GoToRight();
     IntDequeElement * GoToNext();
@@ -16,13 +17,9 @@ class IntList : public IntDeque {
 
     IntList();
     IntList(IntList & plist);
-    int * operator +(int _element); // overloading operator list + int
-    friend int* operator +(int _element, IntList & _deque); // overloading operator int + list
+
     int * operator --();
     int * operator --(int nothing);
-
     IntList & operator =(IntList & _deque); // overloading operator =
     int operator ==(IntList & _deque); // overloading operator ==
 };
-
-int* operator +(int _element, IntList & _deque); // overloading operator int + list
