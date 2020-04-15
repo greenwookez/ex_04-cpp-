@@ -247,7 +247,7 @@ void go_to_right_o(IntList & _list, const char * name) {
     };
 };
 
-void go_to_next_o(IntList & _list, const char * name) { //TODO
+void go_to_next_o(IntList & _list, const char * name) {
     printf("%s.GoToNext() == ",name);
     if (_list.Fetch() == NULL) {
         printf("NoCurrentElement\n");
@@ -260,7 +260,7 @@ void go_to_next_o(IntList & _list, const char * name) { //TODO
     };
 };
 
-void go_to_prev_o(IntList & _list, const char * name) { //TODO
+void go_to_prev_o(IntList & _list, const char * name) {
     printf("%s.GoToPrev() == ",name);
     if (_list.Fetch() == NULL) {
         printf("NoCurrentElement\n");
