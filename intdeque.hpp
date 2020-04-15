@@ -19,12 +19,16 @@ class IntDequeElement {
 };
 
 class IntDeque {
-    protected:
+    private:
     IntDequeElement * left;
     IntDequeElement * right;
+
+    protected:
     int buffer;
     IntDequeElement * GetLeft() { return left; }; // Надеюсь, в заголовочном файле допустимо реализовать "getter"...
     IntDequeElement * GetRight() { return right; };
+    void SetLeft(IntDequeElement *pElem) { left = pElem; };
+    void SetRight(IntDequeElement *pElem) { right = pElem; };
 
     public:
     IntDeque();

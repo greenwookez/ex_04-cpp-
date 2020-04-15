@@ -5,8 +5,8 @@
 
 IntList :: IntList() {
     current_elem = NULL;
-    left = NULL;
-    right = NULL;
+    SetLeft(NULL);
+    SetRight(NULL);
     buffer = 0;
 };
 
@@ -14,7 +14,7 @@ int IntList :: countCurrentElemPosition() {
     IntDequeElement * tmp;
     int count = 1;
 
-    tmp = left;
+    tmp = GetLeft();
     while(tmp) {
         if (current_elem == tmp) {
             return count;
@@ -30,7 +30,7 @@ IntList :: IntList(IntList & plist) : IntDeque(plist) {
     IntDequeElement * marker;
     int count,i;
     count = plist.countCurrentElemPosition();
-    marker = left;
+    marker = GetLeft();
     i = 1;
     while(i < count) {
         marker = marker -> GetNext();
@@ -40,19 +40,19 @@ IntList :: IntList(IntList & plist) : IntDeque(plist) {
 };
 
 IntDequeElement * IntList :: GoToLeft() {
-    current_elem = left;
-    return left;
+    current_elem = GetLeft();
+    return GetLeft();
 };
 
 IntDequeElement * IntList :: GoToRight() {
-    current_elem = right;
-    return right;
+    current_elem = GetRight();
+    return GetRight();
 };
 
 IntDequeElement * IntList :: GoToNext() {
     if (current_elem == NULL) {
         return NULL;
-    } else if (current_elem == right) {
+    } else if (current_elem == GetRight()) {
         return NULL;
     } else {
         current_elem = current_elem -> GetNext();
@@ -63,7 +63,7 @@ IntDequeElement * IntList :: GoToNext() {
 IntDequeElement * IntList :: GoToPrev() {
     if (current_elem == NULL) {
         return NULL;
-    } else if (current_elem == left) {
+    } else if (current_elem == GetLeft()) {
         return NULL;
     } else {
         current_elem = current_elem -> GetPrev();
@@ -110,7 +110,7 @@ int * IntList :: AddRight(int _element) {
     return tmp;
 };
 int * IntList :: operator --() {
-    if (left == right) {
+    if (GetLeft() == GetRight()) {
         current_elem = NULL;
         return RemoveLeft();
     } else {
@@ -122,7 +122,7 @@ int * IntList :: operator --() {
 };
 
 int * IntList :: operator --(int nothing) {
-    if (left == right) {
+    if (GetLeft() == GetRight()) {
         current_elem = NULL;
         return RemoveRight();
     } else {
@@ -139,7 +139,7 @@ IntList & IntList :: operator =(IntList & _list) {
     IntDeque::operator=(_list);
     int count,i;
     count = _list.countCurrentElemPosition();
-    marker = left;
+    marker = GetLeft();
     i = 1;
     while(i < count) {
         marker = marker -> GetNext();
@@ -157,8 +157,8 @@ int IntList :: operator ==(IntList & _list) {
     if (this -> countCurrentElemPosition() != _list.countCurrentElemPosition()) {
         return 0;
     }
-    tmp1 = this -> left;
-    tmp2 = _list.left; 
+    tmp1 = this -> GetLeft();
+    tmp2 = _list.GetLeft(); 
     while (1) {
         if ((tmp1 == NULL && tmp2 != NULL) || (tmp2 == NULL && tmp1 != NULL)) {
             return 0;
